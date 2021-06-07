@@ -67,7 +67,7 @@ $(document).on('submit', '#form-item', function(event) {
     if($('#submit-item').val() == "add"){
     	// console.log('add ra');
 	    $.ajax({
-	    		url: 'data/add_item.php',
+	    		url: 'data/add_item',
 	    		type: 'post',
 	    		dataType: 'json',
 	    		data: {
@@ -99,7 +99,7 @@ $(document).on('submit', '#form-item', function(event) {
 function editModal(item_id){
 	// $('#submit-item').val('add');
 	$.ajax({
-			url: 'data/get_item.php',
+			url: 'data/get_item',
 			type: 'post',
 			dataType: 'json',
 			data: {
@@ -107,13 +107,13 @@ function editModal(item_id){
 			},
 			success: function (data) {
 				$('#submit-item').val(data.event);
-				$('#item-name').val(data.name);
-				$('#item-price').val(data.price);
-				$('#item-id').val(data.id);
-				$('#code').val(data.code);
-				$('#brand').val(data.brand);
-				$('#grams').val(data.grams);
-				$('#item-type').val(data.type);
+				$('#item-name').val(data.itemName);
+				$('#item-price').val(data.itemPrice);
+				$('#item-id').val(data.itemId);
+				$('#code').val(data.itemCode);
+				$('#brand').val(data.itemBrand);
+				$('#grams').val(data.itemGrams);
+				$('#item-type').val(data.itemType.itemTypeDesc);
 				$('#modal-item').find('.modal-title').text(data.title);
 				$('#modal-item').modal('show');
 			},

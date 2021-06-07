@@ -6,6 +6,7 @@ use App\Entity\Cart;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\ItemType;
 
 class AdminController extends AbstractController
 {
@@ -22,7 +23,9 @@ class AdminController extends AbstractController
      **/
     public function item(): Response
     {
-        return $this->render('admin/item.html.twig');
+        $types = $this->getDoctrine()->getRepository(ItemType::class)->findAll();
+
+        return $this->render('admin/item.html.twig', ['types' => $types]);
     }
 
     

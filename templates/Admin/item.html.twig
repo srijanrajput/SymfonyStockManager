@@ -25,6 +25,6 @@
         </div>
 {% endblock %}
 {% block modal %}
-<?php include_once('modal/add_new_item.php'); ?>
-<?php include_once('modal/message.php'); ?>
+{% include "admin/_add_new_item.html.twig" %}
+{% include "admin/_message.html.twig" %}
 {% endblock %}
