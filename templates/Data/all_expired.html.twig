@@ -1,0 +1,35 @@
+<h2>Produit expiré</h2>
+<div class="table-responsive">
+        <table id="myTable-expired" class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th><center>Nom produit</center></th>
+                    <th><center>Prix</center></th>
+                    <th><center>Qté</center></th>
+                    <th><center>Date d'expiration</center></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for ex in expireds %}
+                <tr align="center" class="text-danger">
+                    <td> {{ex.expItemName}}</td>
+                    <td> {{ex.expItemPrice|number_format(2, '.', ',') }} DH</td>
+                    <td> {{ex.expItemQty}}</td>
+                    <td> {{ex.expExpiredDate|date }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+<!-- for the datatable of employee -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#myTable-expired').DataTable();
+    });
+</script>
+

@@ -1,0 +1,62 @@
+<br />
+<div class="table-responsive">
+        <table id="myTable-sales" class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Code produit</th>
+                    <th>Nom produit</th>
+                    <th>Marque</th>
+                    <th><center>Poids en gramms</center></th>
+                    <th><center>Type</center></th>
+                    <th><center>Prix</center></th>
+                    <th><center>Qté</center></th>
+                    <th><center>Prix Total</center></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% set total = 0 %}
+            {% set subTotal = 0 %}
+            {% for ds in dailySales %}
+            {% set price = ds.price %}
+            {% set qty = ds.qty %}
+            {% set subTotal = price * qty %}
+            {% set total = total + subTotal %}
+                
+            %}
+                <tr>
+                    <td>{{ ds.itemCode }}</td>
+                    <td>{{ ds.genericName }}</td>
+                    <td>{{ ds.brand }}</td>
+                    <td>{{ ds.gram }}</td>
+                    <td>{{ ds.type }}</td>
+                    <td align="center">{{ ds.price|number_format(2, '.', ',') }}</td>
+                    <td align="center">{{ ds.qty }}</td>
+                    <td align="center">{{ subTotal }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td align="right"><strong>TOTAL:</strong></td>
+                <td align="center">
+                    <strong>{{ total|number_format(2, '.', ',') }} Dhs</strong>
+                </td>
+            </tr>
+        </table>
+</div>
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#myTable-sales').DataTable();
+    });
+</script>

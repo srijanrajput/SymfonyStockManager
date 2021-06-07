@@ -1,0 +1,32 @@
+<br />
+<div class="table-responsive">
+        <table id="myTable-stock" class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th><center>Nom Produit</center></th>
+                    <th><center>Prix</center></th>
+                    <th><center>Qté</center></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for s in stocks %}
+                <tr align="center">
+                    <td>{{s.item_itemName|capitalize}}</td>
+                    <td>{{s.item_itemPrice|number_format(2, '.', ',')}} DH</td>
+                    <td>{{s.qty}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+<!-- for the datatable of employee -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#myTable-stock').DataTable();
+    });
+</script>

@@ -1,0 +1,48 @@
+<br />
+<div class="table-responsive">
+        <table id="myTable-item" class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Code produit</th>
+                    <th>Nom produit</th>
+                    <th>Marque</th>
+                    <th>Type</th>
+                    <th><center>Poids en gramms</center></th>
+                    <th><center>Prix</center></th>
+                    <th>
+                        <center>Action</center>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for it in items %}
+                    <tr align="center">
+                        <td align="left">{{ it.itemCode }}</td>
+                        <td align="left">{{ (it.itemName|capitalize) }}</td>
+                        <td align="left">{{ it.itemBrand }}</td>
+                        <td align="left">{{ it.itemType.itemTypeDesc }}</td>
+                        <td>{{ it.itemGrams }}</td>
+                        <td>{{ it.itemPrice|number_format(2, '.', ',') }} DH</td>
+                        <td>
+                           <center>
+                               <button onclick="editModal('{{ it.itemId }}')" type="button" class="btn btn-warning btn-xs">Modifier
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                </button>
+                           </center>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#myTable-item').DataTable();
+    });
+</script>

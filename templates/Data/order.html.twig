@@ -1,0 +1,126 @@
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                Produit</h3>
+            </div>
+            <div class="panel-body">
+                <!-- start item -->
+               <div class="table-responsive">
+                        <table id="myTable-item-order" class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th><center>Code produit</center></th>
+                                    <th><center>Nom produit</center></th>
+                                    <th><center>Marque</center></th>
+                                    <th><center>Prix</center></th>
+                                    <th><center>Qté</center></th>
+                                    <th><center></center></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for s in stocks %}
+                                <tr align="center">
+                                    <td> {{s.item_itemCode|upper}}</td>
+                                    <td> {{s.item_itemName|upper}}</td>
+                                    <td> {{s.item_itemBrand|upper}}</td>
+                                    <td> {{s.item_itemPrice|number_format(2, '.', ',') }} DH</td>
+                                    <td> {{s.s_stockQty}}</td>
+                                    <td>
+                                        <button onclick="toCart('{{s.s_stockId}}',' {{s.s_stockQty}}',' {{s.item_itemId}}');" type="button" class="btn btn-success btn-xs">
+                                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                </div>
+
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#myTable-item-order').DataTable();
+                    });
+                </script>
+
+                <!-- end item -->
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                Panier
+                </h3>
+            </div>
+            <div class="panel-body">
+                <!-- cart -->
+                <div class="table-responsive">
+                        <table id="myTable-cart" class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th><center>Nom produit</center></th>
+                                    <th><center>Prix</center></th>
+                                    <th><center>Qté</center></th>
+                                    <th><center>Somme</center></th>
+                                    <th><center></center></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                             {% set total = 0 %}
+                             {% for c in cartDatas %}  
+                                {% set price = c.item.itemPrice %}
+                                {% set qty = c.cartQty %}
+                                {% set subTotal = price * qty %}
+                                {% set total = total + subTotal %}
+
+                                <tr align="center">
+                                    <td> {{c.item.itemName}}</td>
+                                    <td> {{c.item.itemPrice|number_format(2, '.', ',') }}</td>
+                                    <td> {{c.cartQty}}</td>
+                                    <td> {{subTotal|number_format(2, '.', ',') }}</td>
+                                    <td>
+                                    <button onclick="delCart(' {{c.cartStockId}}','{{qty}}','{{c.cartId}}');" type="button" class="btn btn-danger btn-xs">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td align="right"><strong>Total:</strong></td>
+                                    <td align="center">
+                                        <strong> {{total|number_format(2, '.', ',') }}</strong>
+                                    </td>
+                                    <td>
+                                        {% if total > 0 %}
+                                        <button onclick="confirm_cart()" type="button" class="btn btn-success btn-xs">
+                                        Confirm
+                                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                        </button>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                        </table>
+                </div>
+
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#myTable-cart').DataTable();
+                    });
+                </script>
+
+                <!-- cart -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<br /><br /><br /><br /><br /><br /><br /><br />

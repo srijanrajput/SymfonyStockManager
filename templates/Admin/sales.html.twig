@@ -1,0 +1,37 @@
+{% extends 'admin/base.html.twig' %}
+{% set sales = true %}
+{% block pagewrapper %}
+	<div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <strong>Ventes du jours:</strong>
+                <input id="dailyDate" type="date" class="btn btn-default btn-sm" placeholder=""
+                value="<?= date('Y-m-d'); ?>">
+            
+                <div id="printBut" class="pull-right">
+                <button type="button" class="btn btn-success btn-sm">
+                    IMPRIMER
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+                </button>
+                </div>
+               
+               <div id="all-sales"></div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+{% endblock %}
+{% block modal %}
+
+{% endblock %}

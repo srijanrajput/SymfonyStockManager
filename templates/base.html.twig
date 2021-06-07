@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{# Run `composer require symfony/webpack-encore-bundle`
+		           and uncomment the following Encore helpers to start using Symfony UX #}
+		{% block stylesheets %}
+			{#{{ encore_entry_link_tags('app') }}#}
+			<link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
+		{% endblock %}
+
+		{% block javascripts %}
+			{#{{ encore_entry_script_tags('app') }}#}
+            {# <script type="text/javascript" src="{{asset('js/jquery-1.12.3.js')}}"></script>
+            <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+            <script type="text/javascript" src="{{asset('js/regis.js')}}"></script> #}
+
+		{% endblock %}
+	</head>
+	<body style="background-image: url({{ absolute_url(asset('images/stock.jpg')) }});
+			              position: fixed;
+			              left: 0;
+			              right: 0;
+			              background-size: cover;
+			              width: 100%;
+			              height: 100%;
+			              z-index: 1;">
+		<div class="container" style="
+				  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+				  text-align: center;">
+
+			<div id="login-form">
+
+				<h3>SMARTS</h3>
+
+				<fieldset>
+
+					<form id="form-login">
+						<input type="text" autofocus id="un" placeholder="Username" required autocomplete="off">
+
+						<input type="password" id="up" placeholder="Password" required autocomplete="off">
+
+						<input type="submit" name="log" value="Login">
+					</form>
+
+				</fieldset>
+
+			</div>
+			<!-- end login-form -->
+
+		</div>
+		{% block body %}{% endblock %}
+	</body>
+</html>

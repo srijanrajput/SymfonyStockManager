@@ -1,0 +1,52 @@
+<!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" >
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header" >
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="home.php">SMARTS | Gestionnaire de stock</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav" >
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  Adminstrateur <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Paramètre</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse" >
+                <ul class="nav navbar-nav  side-nav" style="background-color: white;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 10px rgba(0, 0, 0, 0.19);">
+                    <li class="{{home is defined ?'active':''}}">
+                        <a href="home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></i> Home</a>
+                    </li>
+                    <li class="{{item is defined ?'active':''}}">
+                        <a href="item"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Liste des produits </a>
+                    </li>
+                    <li class="{{product is defined ?'active':''}}">
+                        <a href="product"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>  Profile des produits</a>
+                    </li>
+                    <li class="{{stock is defined ?'active':''}}">
+                        <a href="stock"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Stocks</a>
+                    </li>
+                     <li class="{{expired is defined ?'active':''}}">
+                        <a href="expired"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Produit Expiré</a>
+                    </li>
+                    <li class="{{sales is defined ?'active':''}}">
+                        <a href="sales"><span class="glyphicon glyphicon-record" aria-hidden="true"></span> Ventes</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>

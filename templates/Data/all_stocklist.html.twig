@@ -1,0 +1,58 @@
+
+<br />
+<div class="table-responsive">
+        <table id="myTable-stocklist" class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th><center></center></th>
+                    <th>Code produit</th>
+                    <th>Nom produit</th>
+                    <th>Type</th>
+                    <th><center>Fabriqué</center></th>
+                    <th><center>Acheté</center></th>
+                    <th><center>Prix</center></th>
+                    <th><center>Qté</center></th>
+                    <th>Date d'expirartion</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                    {% set dateNow = "now"|date('Y-m') %}
+                    {% for sl in stockList %}  
+                        {% set xDate = sl.s_stockExpiry|date('Y-m') %}
+                        {% set class = "text-success" %}
+                        {% if xDate == dateNow %} 
+                            {% set class = "text-warning" %}
+                        {% endif %}
+
+                    <tr  align="center" class=" class">
+                        <td><input type="checkbox" name="stock" value="{{sl.s_stockId}}"></td>
+                        <td align="left">{{sl.item_itemCode}}</td>
+                        <td align="left">{{sl.item_itemName|upper}}</td>
+                        <td align="left">{{sl.type_itemTypeDesc|upper}}</td>
+                        <td>{{sl.s_stockManufactured|date}}</td>
+                        <td>{{sl.s_stockPurchased|date}}</td>
+                        <td>{{sl.item_itemPrice|number_format(2, '.', ',') }} DH</td>
+                        <td> {{sl.s_stockQty}}</td>
+                        <td align="left" width="110px;">{{sl.s_stockExpiry|date}}
+                            {% if xDate <= dateNow %}
+                                <span class="label label-danger">!</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+<!-- for the datatable of employee -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#myTable-stocklist').DataTable();
+    });
+</script>
+

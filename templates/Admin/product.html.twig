@@ -1,0 +1,36 @@
+{% extends 'admin/base.html.twig' %}
+{% set product = true %}
+{% block pagewrapper %}
+	 <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <button class="btn btn-default" id="add-stock">Nouveau stock
+                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                </button>
+
+                <button class="btn btn-danger" id="del-stock">Supprimer la selection
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+
+               <div id="all-stocklist"></div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+{% endblock %}
+{% block modal %}
+<?php include_once('modal/stock.php'); ?>
+<?php include_once('modal/confirmation.php'); ?>
+<?php include_once('modal/message.php'); ?>
+{% endblock %}
