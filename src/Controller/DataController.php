@@ -8,10 +8,12 @@ use App\Entity\Item;
 use App\Entity\ItemType;
 use App\Entity\Sales;
 use App\Entity\Stock;
+use DateTime;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use \Doctrine\ORM\Query;
+use PhpParser\Builder\Class_;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -230,7 +232,7 @@ class DataController extends AbstractController
         } //end isset
 
         return new JsonResponse(
-            ['valid' => 'false']
+            ['valid' => false]
         );
     }
 
@@ -278,7 +280,7 @@ class DataController extends AbstractController
         } //end isset        
 
         return new JsonResponse(
-            ['valid' => 'false']
+            ['valid' => false]
         );
     }
 
@@ -301,5 +303,74 @@ class DataController extends AbstractController
                 $array
             );
         }
+    }
+    
+    /**
+     * @Route("/add_stock")
+     * */
+    public function addStock(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        if (isset($_POST['purc'])) {
+                $item_id = $_POST['item_id'];
+                $qty = $_POST['qty'];
+                $xDate = $_POST['xDate'];
+                $manu = $_POST['manu'];
+                $purc = $_POST['purc'];
+
+                $item = $entityManager->getRepository(Item::class)->find($item_id);
+                $stock = new Stock();
+                $stock->setItem($item);
+                $stock->setStockQty($qty);
+                $stock->setStockExpiry((new \DateTime($xDate)));
+                $stock->setStockManufactured((new \DateTime($manu)));
+                $stock->setStockPurchased((new \DateTime($purc)));
+                $entityManager->persist($stock);
+        }
+
+        $entityManager->flush();
+        return new Response(
+            'success'
+        );
+    }
+    
+    /**
+     * @Route("/del_expired")
+     * */
+    public function delExpired(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        if(isset($_POST['stock_id'])){
+            $stock_id = $_POST['stock_id'];
+            //e search ang stock details which is
+            //itemName, price, qty, expiredDate
+            $stockDetail = $entityManager->getRepository(Stock::class)->find($stock_id);
+
+            $expired = new Expired();
+            $expired->setExpItemname($stockDetail->getItem()->getItemName());
+            $expired->setExpItemprice($stockDetail->getItem()->getItemPrice());
+            $expired->setExpItemqty($stockDetail->getStockQty());
+            $expired->setExpExpireddate($stockDetail->getStockExpiry());
+            $entityManager->persist($expired);
+
+            $entityManager->remove($stockDetail);
+
+            try {
+                $entityManager->flush();
+                $return['valid'] = true;
+                $return['msg'] = "Supression avec succés!";
+                return new JsonResponse(
+                    $return
+                );
+            } catch (\Exception $th) {
+                //throw $th;
+            }
+        }//end isset
+
+        return new JsonResponse(
+            ['valid' => false]
+        );
     }
 }

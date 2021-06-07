@@ -213,7 +213,7 @@ $('.del-expired').click(function(event) {
 			finish = true;
 			var stock_id = $(this).val();
 			$.ajax({
-					url: 'data/del_expired.php',
+					url: 'data/del_expired',
 					type: 'post',
 					dataType: 'json',
 					data: {
@@ -243,7 +243,7 @@ $('#add-stock').click(function(event) {
 });
 
 //form stock
-var fuck = 0;
+var stock = 0;
 $(document).on('submit', '#form-stock', function(event) {
 	event.preventDefault();
 	/* Act on the event */
@@ -252,10 +252,10 @@ $(document).on('submit', '#form-stock', function(event) {
     var xDate = $('#xDate').val();
     var manu = $('#manu').val();
     var purc = $('#purc').val();
-    fuck++;
-    // alert(fuck);
+    stock++;
+
     $.ajax({
-    		url: 'data/add_fuck.php',
+    		url: 'data/add_stock',
     		type: 'post',
     		// dataType: 'json',
     		data: {

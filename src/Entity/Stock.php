@@ -38,9 +38,9 @@ class Stock
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="stock_added", type="datetime", nullable=false, options={"default"="current_timestamp()"})
+     * @ORM\Column(name="stock_added", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $stockAdded = 'current_timestamp()';
+    private $stockAdded;
 
     /**
      * @var \DateTime
