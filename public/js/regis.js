@@ -355,7 +355,7 @@ $(document).on('submit', '#form-toCart', function(event) {
 	}else{
 		// alert('Enough!');
 		$.ajax({
-				url: 'data/add_cart.php',
+				url: 'data/add_cart',
 				type: 'post',
 				data: {
 					stock_id:stock_id,
@@ -378,7 +378,7 @@ $(document).on('submit', '#form-toCart', function(event) {
 //del from cart
 function delCart(stock_id, qty, cart_id){
 	$.ajax({
-			url: 'data/del_cart.php',
+			url: 'data/del_cart',
 			type: 'post',
 			data: {
 				stock_id:stock_id,
@@ -440,7 +440,7 @@ $('#confirm-yes').click(function(event) {
 	var choice = $('#confirm-type').val();
 	if(choice == 'confirmCart'){
 		$.ajax({
-				url: 'data/confirm_order.php',
+				url: 'data/confirm_order',
 				type: 'post',
 				dataType: 'json',
 				data:{

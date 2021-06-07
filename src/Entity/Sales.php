@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -73,9 +74,9 @@ class Sales
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_sold", type="datetime", nullable=false, options={"default"="current_timestamp()"})
+     * @ORM\Column(name="date_sold", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $dateSold = 'current_timestamp()';
+    private $dateSold;
 
     public function getSalesId(): ?int
     {
