@@ -317,7 +317,7 @@ showAllStocks();
 $('#stock-report').click(function(event) {
 	/* Act on the event */
 	// window.open('print.php?datePick=<?php echo $datePick; ?>','name','width=auto,height=auto');
-	window.open('data/print.php','name','width=auto,height=auto');
+	window.open('data/print','name','width=auto,height=auto');
 });
 
 function showOrder(){
@@ -503,7 +503,7 @@ $(document).on('change', '#dailyDate', function(event) {
 $('#printBut').click(function(event) {
 	/* Act on the event */
 	var date = $('#dailyDate').val();
-	window.open('data/print-sales.php?date='+date,'name','width=600,height=400');	
+	window.open('data/print-sales?date='+date,'name','width=600,height=400');	
 });
 
 

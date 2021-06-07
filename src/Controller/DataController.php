@@ -15,9 +15,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use \Doctrine\ORM\Query;
 use PhpParser\Builder\Class_;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/data")
+ * @IsGranted("ROLE_ADMIN")
  */
 class DataController extends AbstractController
 {
@@ -37,7 +39,21 @@ class DataController extends AbstractController
      * */
     public function saleslist(): Response
     {
-        $result = $this->getDoctrine()->getRepository(Sales::class)->findByDateSold(new \DateTime());
+        $date = $_GET['date'];
+        if($date && $date != 'undefined'){
+            $date = (new \DateTime($date));
+        }else{
+            $date = (new \DateTime());
+        }
+        $from = new \DateTime($date->format("Y-m-d")." 00:00:00");
+        $to   = new \DateTime($date->format("Y-m-d")." 23:59:59");
+    
+        $result = $this->getDoctrine()->getRepository(Sales::class)
+                                        ->createQueryBuilder("e")
+                                        ->andWhere('e.dateSold BETWEEN :from AND :to')
+                                        ->setParameter('from', $from )
+                                        ->setParameter('to', $to)
+                                        ->getQuery()->getResult();
 
         return $this->render('data/all_sales.html.twig', [
             'dailySales' => $result,
@@ -372,5 +388,27 @@ class DataController extends AbstractController
         return new JsonResponse(
             ['valid' => false]
         );
+    }
+
+     /**
+     * @Route("/print")
+     * */
+    public function print(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $stocks = $entityManager->getRepository(Stock::class)->getStockList();
+        return $this->render('data/print.html.twig', compact('stocks'));
+            
+    }
+
+    /**
+     * @Route("/print-sales")
+     * */
+    public function printSales(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $date = $_GET['date'];
+        $dailySales = $entityManager->getRepository(Sales::class)->findByDateSold((new \DateTime($date)));
+        return $this->render('data/print_sales.html.twig', compact('dailySales'));
     }
 }
